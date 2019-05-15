@@ -1,0 +1,135 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "63b41d266d18711b6c480aa2d3f511e6",
+    "packages": [
+        {
+            "name": "ponup/ddd",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ponup/ddd.git",
+                "reference": "28803466ce4cee5f9ef5b435d65559936a9df788"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ponup/ddd/zipball/28803466ce4cee5f9ef5b435d65559936a9df788",
+                "reference": "28803466ce4cee5f9ef5b435d65559936a9df788",
+                "shasum": ""
+            },
+            "require": {
+                "ponup/glm": "^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ponup\\ddd\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Santiago Lizardo",
+                    "email": "santiago.lizardo@gmail.com"
+                }
+            ],
+            "description": "A PHP framework in top of the PHP-OpenGL extension which simplifies the 3D application development",
+            "time": "2019-05-12T17:08:02+00:00"
+        },
+        {
+            "name": "ponup/gl-loaders",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ponup/gl-loaders.git",
+                "reference": "ee7735851ff1111b9f6e280ef699210e27dd5a2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ponup/gl-loaders/zipball/ee7735851ff1111b9f6e280ef699210e27dd5a2c",
+                "reference": "ee7735851ff1111b9f6e280ef699210e27dd5a2c",
+                "shasum": ""
+            },
+            "require": {
+                "ponup/glm": "^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ponup\\GlLoaders\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Santiago Lizardo",
+                    "email": "santiago.lizardo@gmail.com"
+                }
+            ],
+            "description": "Loaders for many file formats used in OpenGL",
+            "time": "2019-05-13T22:12:50+00:00"
+        },
+        {
+            "name": "ponup/glm",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ponup/glm.git",
+                "reference": "9de080ce427d0fd3ea4a56de05ea617df688068a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ponup/glm/zipball/9de080ce427d0fd3ea4a56de05ea617df688068a",
+                "reference": "9de080ce427d0fd3ea4a56de05ea617df688068a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "glm\\": "src/"
+                },
+                "files": [
+                    "src/globals.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Santiago Lizardo",
+                    "email": "santiago.lizardo@gmail.com"
+                }
+            ],
+            "description": "A port of the OpenGL Mathematics library (GLM) to PHP",
+            "time": "2019-05-12T14:13:34+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

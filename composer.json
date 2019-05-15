@@ -1,0 +1,15 @@
+{
+    "name": "ponup/maze-escape",
+    "type": "project",
+    "require": {
+        "ponup/ddd": "^0.1",
+        "ponup/gl-loaders": "^0.1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Santiago Lizardo",
+            "email": "santiago.lizardo@gmail.com"
+        }
+    ]
+}
