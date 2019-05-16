@@ -5,13 +5,10 @@ use glm\vec3;
 use glm\mat4;
 use \Ponup\ddd\Shader;
 
-class Ground
+class Ground extends Entity
 {
     protected $shaderProgram;
-    public function setPosition($position)
-    {
-        $this->position = $position;
-    }
+
     public function __construct()
     {
         $this->position = new vec3(0, -1, 0);

@@ -5,37 +5,14 @@ use glm\vec3;
 use glm\mat4;
 use \Ponup\ddd\Shader;
 
-function loadTexture($path)
-{
-    $textureID = [];
-    glGenTextures(1, $textureID);
-
-    $imgLoader = new Ponup\GlLoaders\ImageLoader;
-    $data = $imgLoader->load($path, $width, $height);
-    glBindTexture(GL_TEXTURE_2D, $textureID[0]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, $width, $height, 0, GL_RGBA, GL_UNSIGNED_BYTE, $data);
-    unset($data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    return $textureID[0];
-}
-
-class Cube
+class Cube extends Entity
 {
     protected $shaderProgram;
 
-    public function setPosition($position)
-    {
-        $this->position = $position;
-    }
     public function __construct($texture)
     {
+		parent::__construct();
+
         if($texture == 1) {
             $texture = 'marble.jpg';
             $loc = 'texture1';
@@ -116,9 +93,8 @@ class Cube
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * 4, 3 * 4);
 
-
         $this->texture = $texture;
-        $this->cubeTexture = loadTexture('textures/' . $texture);
+        $this->cubeTexture = $this->textureLoader->load('textures/' . $texture);
         $mvpLoc = glGetUniformLocation($this->shaderProgram->getId(), $loc);
         $this->shaderProgram->Use();
         glUniform1i($mvpLoc, 0);

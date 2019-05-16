@@ -5,7 +5,7 @@ use glm\vec3;
 use glm\mat4;
 use \Ponup\ddd\Shader;
 
-class Water
+class Water extends Entity
 {
     public function __construct()
     {

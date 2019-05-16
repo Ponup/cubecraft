@@ -6,6 +6,8 @@ dl('opengl.' . PHP_SHLIB_SUFFIX);
 ini_set('memory_limit', '2048M');
 
 require 'vendor/autoload.php';
+require 'Entity.php';
+require 'TextureLoader.php';
 require 'Ground.php';
 require 'Water.php';
 require 'Skybox.php';

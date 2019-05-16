@@ -5,14 +5,10 @@ use glm\vec3;
 use glm\mat4;
 use \Ponup\ddd\Shader;
 
-class SimpleCube
+class SimpleCube extends Entity
 {
     protected $shaderProgram;
     
-    public function setPosition($position)
-    {
-        $this->position = $position;
-    }
     public function __construct($texture)
     {
         $texture = $texture == 1 ? 'ground.frag' : 'ground.1.frag';

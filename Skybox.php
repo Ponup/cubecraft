@@ -8,7 +8,7 @@ use Ponup\ddd\Shader\Vertex;
 use Ponup\ddd\Shader\Fragment;
 use glm\vec3;
 
-class Skybox
+class Skybox extends Entity
 {
     public function __construct()
     {
