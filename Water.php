@@ -9,10 +9,11 @@ class Water extends Entity
 {
     public function __construct()
     {
+		parent::__construct();
+
         $this->time = 0;
 
         $this->position = new vec3(0, -1, 0);
-        $this->shaderProgram = new Shader\Program;
         $this->shaderProgram->add(new Shader\Vertex("shaders/simple.vert"));
         $this->shaderProgram->add(new Shader\Fragment('shaders/water.frag'));
         $this->shaderProgram->compile();

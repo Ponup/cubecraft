@@ -7,13 +7,12 @@ use \Ponup\ddd\Shader;
 
 class SimpleCube extends Entity
 {
-    protected $shaderProgram;
-    
     public function __construct($texture)
     {
+		parent::__construct();
+
         $texture = $texture == 1 ? 'ground.frag' : 'ground.1.frag';
         $this->position = new vec3(0, 0, 0);
-        $this->shaderProgram = new Shader\Program;
         $this->shaderProgram->add(new Shader\Vertex("shaders/cubemap.vert"));
         $this->shaderProgram->add(new Shader\Fragment("shaders/" . $texture));
         $this->shaderProgram->compile();

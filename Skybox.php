@@ -12,6 +12,7 @@ class Skybox extends Entity
 {
     public function __construct()
     {
+		parent::__construct();
 
         $this->skyboxVertices = $skyboxVertices = [
             // positions          
@@ -59,12 +60,10 @@ class Skybox extends Entity
         ];
 
 
-        $skyboxShader = new Program;
-        $skyboxShader->add(new Vertex("shaders/skybox.vert"));
-        $skyboxShader->add(new Fragment("shaders/skybox.frag"));
-        $skyboxShader->compile();
-        $skyboxShader->link();
-        $this->skyboxShader = $skyboxShader;
+        $this->shaderProgram->add(new Vertex("shaders/skybox.vert"));
+        $this->shaderProgram->add(new Fragment("shaders/skybox.frag"));
+        $this->shaderProgram->compile();
+        $this->shaderProgram->link();
 
         $this->skyboxVertices = array_map(function ($el) {
             return floatval($el) * 5000;
@@ -115,13 +114,13 @@ class Skybox extends Entity
     {
         glDisable(GL_DEPTH_TEST);
         //glDepthFunc(GL_LEQUAL);
-        $this->skyboxShader->use();
+        $this->shaderProgram->use();
         $model = new mat4;
         $model = \glm\translate($model, new vec3(0, 0, 0));
 
-        $mvpLoc = glGetUniformLocation($this->skyboxShader->getId(), "projection");
+        $mvpLoc = glGetUniformLocation($this->shaderProgram->getId(), "projection");
         glUniformMatrix4fv($mvpLoc, 1, GL_FALSE, \glm\value_ptr($projection));
-        $mvpLoc = glGetUniformLocation($this->skyboxShader->getId(), "view");
+        $mvpLoc = glGetUniformLocation($this->shaderProgram->getId(), "view");
         glUniformMatrix4fv($mvpLoc, 1, GL_FALSE, \glm\value_ptr($view));
 
         glBindVertexArray($this->vao);

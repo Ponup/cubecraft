@@ -25,7 +25,6 @@ class Cube extends Entity
         }
 
         $this->position = new vec3(0, 0, 0);
-        $this->shaderProgram = new Shader\Program;
         $this->shaderProgram->add(new Shader\Vertex("shaders/cubemap.vert"));
         $this->shaderProgram->add(new Shader\Fragment("shaders/" . $shader));
         $this->shaderProgram->compile();

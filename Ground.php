@@ -11,8 +11,9 @@ class Ground extends Entity
 
     public function __construct()
     {
+		parent::__construct();
+
         $this->position = new vec3(0, -1, 0);
-        $this->shaderProgram = new Shader\Program;
         $this->shaderProgram->add(new Shader\Vertex("shaders/simple.vert"));
         $this->shaderProgram->add(new Shader\Fragment('shaders/ground.frag'));
         $this->shaderProgram->compile();
