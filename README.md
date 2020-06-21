@@ -1,15 +1,24 @@
 
 Cubecraft
-=============
+=========
 
 A proof of concept to show how PHP and OpenGL can be used to write a **Minecraft** like game.
 
-![Screenshot](screenshot.png)
+[<img src="cubecraft-screen-recording.gif" width="250" />](cubecraft-screen-recording.gif)
+
+Requirements
+============
+
+* PHP 7.2
+* PHP-SDL
+* PHP-OpenGL
+* Composer
 
 Usage
 =====
 
 ```bash
+$ composer install
 $ php main.php
 ```
 

@@ -1,9 +1,11 @@
 {
-    "name": "ponup/maze-escape",
+    "name": "ponup/cubecraft",
     "type": "project",
+    "autoload": {
+        "psr-4": {"": "src/"}
+    },    
     "require": {
-        "ponup/ddd": "^0.1",
-        "ponup/gl-loaders": "^0.1.0"
+        "ponup/mammoth": "dev-master"
     },
     "license": "MIT",
     "authors": [

@@ -1,30 +1,22 @@
 <?php
 
-dl('sdl.' . PHP_SHLIB_SUFFIX);
-dl('opengl.' . PHP_SHLIB_SUFFIX);
+declare(strict_types=1);
+
+use Mammoth\Math\Angle;
+use Mammoth\Math\Transform;
+use Mammoth\Math\Vector;
 
 ini_set('memory_limit', '2048M');
 
 require 'vendor/autoload.php';
-require 'Entity.php';
-require 'TextureLoader.php';
-require 'Ground.php';
-require 'Water.php';
-require 'Skybox.php';
-require 'Cube.php';
-require 'SimpleCube.php';
-
-use glm\vec2;
-use glm\vec3;
-use glm\mat4;
 
 $yaw    = -90.0;    // Yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right (due to how Eular angles work) so we initially rotate a bit to the left.
 $pitch  =  0.0;
 $lastMouseCoordinates = null;
 
-$cameraPos   = new vec3(0.0, 0.0,  5.0);
-$cameraFront = new vec3(0.0, 0.0, -1.0);
-$cameraUp    = new vec3(0.0, 1.0,  0.0);
+$cameraPos   = new Vector(0.0, 0.0,  5.0);
+$cameraFront = new Vector(0.0, 0.0, -1.0);
+$cameraUp    = new Vector(0.0, 1.0,  0.0);
 
 $keys = array_fill_keys(range('a', 'z'), false);
 
@@ -40,11 +32,9 @@ SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 $window = SDL_CreateWindow("Cube Craft", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 $context = SDL_GL_CreateContext($window);
 
-//glEnable(GL_CULL_FACE);
-//glEnable(GL_DEPTH_TEST);
 $cubeTexture = 1;
 $firstCube = new Cube($cubeTexture);
-$firstCube->setPosition(new vec3(0, 0, -10));
+$firstCube->setPosition(new Vector(0, 0, -10));
 $cubes = [
     $firstCube,
 ];
@@ -64,11 +54,11 @@ while (!$quit) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     $fov = 45.0;
-    $projection = \glm\perspective($fov, (float)WIDTH / (float)HEIGHT, 0.1, 100.0);
-    $view = \glm\lookAt($cameraPos, $cameraPos->add($cameraFront), $cameraUp);
-
+    $projection = Transform::perspective($fov, (float) WIDTH / (float) HEIGHT, 0.1, 100.0);
+    $view = Transform::lookAt($cameraPos, $cameraPos->add($cameraFront), $cameraUp);
+    
     $skybox->render($view, $projection);
-   // $ground->render($view, $projection);
+    //$ground->render($view, $projection);
     //$water->render($view, $projection);
 
     foreach ($cubes as $cube) {
@@ -96,12 +86,12 @@ while (!$quit) {
                 $ypos = $event->motion->y;
 
                 if (null === $lastMouseCoordinates) {
-                    $lastMouseCoordinates = new vec2($xpos - (WIDTH >> 1), $ypos + (HEIGHT >> 1));
+                    $lastMouseCoordinates = new Vector($xpos - (WIDTH >> 1), $ypos + (HEIGHT >> 1));
                 }
 
                 $xoffset = $xpos - $lastMouseCoordinates->x;
                 $yoffset = $lastMouseCoordinates->y - $ypos; // Reversed since y-coordinates go from bottom to left
-                $lastMouseCoordinates = new vec2($xpos, $ypos);
+                $lastMouseCoordinates = new Vector($xpos, $ypos);
 
                 $sensitivity = 0.6; // Change this value to your liking
                 $xoffset *= $sensitivity;
@@ -116,20 +106,20 @@ while (!$quit) {
                 if ($pitch < -89.0)
                     $pitch = -89.0;
 
-                $front = new vec3(
-                    cos(\glm\radians($yaw)) * cos(\glm\radians($pitch)),
-                    sin(\glm\radians($pitch)),
-                    sin(\glm\radians($yaw)) * cos(\glm\radians($pitch))
+                $front = new Vector(
+                    cos(Angle::toRadians($yaw)) * cos(Angle::toRadians($pitch)),
+                    sin(Angle::toRadians($pitch)),
+                    sin(Angle::toRadians($yaw)) * cos(Angle::toRadians($pitch))
                 );
-                $cameraFront = \glm\normalize($front);
+                $cameraFront = $front->normalize();
                 break;
             case SDL_KEYDOWN:
                 $symChar = chr($event->key->keysym->sym);
-                if($symChar == 'q') $quit = true;
-                if($symChar == 'c') $cubes = [];
-                if($symChar == '1') $cubeTexture = 1;
-                if($symChar == '2') $cubeTexture = 2;
-                if($symChar == 'u') array_pop($cubes);
+                if ($symChar == 'q') $quit = true;
+                if ($symChar == 'c') $cubes = [];
+                if ($symChar == '1') $cubeTexture = 1;
+                if ($symChar == '2') $cubeTexture = 2;
+                if ($symChar == 'u') array_pop($cubes);
                 $keys['w'] = $symChar == 'w';
                 $keys['s'] = $symChar == 's';
                 $keys['a'] = $symChar == 'a';
@@ -150,20 +140,19 @@ while (!$quit) {
     }
     if ($keys['a']) {
         $cameraPos = $cameraPos->substract(
-            \glm\cross($cameraFront, $cameraUp)->normalize()->scale($cameraSpeed)
+            $cameraFront->cross($cameraUp)->normalize()->scale($cameraSpeed)
         );
     }
     if ($keys['d']) {
         $cameraPos = $cameraPos->add(
-            \glm\cross($cameraFront, $cameraUp)->normalize()->scale($cameraSpeed)
+            $cameraFront->cross($cameraUp)->normalize()->scale($cameraSpeed)
         );
     }
-   // $cameraPos = $cameraPos->substract(new vec3(0, $cameraPos->y, 0));
 
     SDL_GL_SwapWindow($window);
     SDL_Delay(30);
 }
 
-//SDL_GL_DeleteContext($context);
+SDL_GL_DeleteContext($context);
 SDL_DestroyWindow($window);
 SDL_Quit();
