@@ -9,17 +9,17 @@ A proof of concept to show how PHP and OpenGL can be used to write a **Minecraft
 Requirements
 ============
 
-* PHP 7.2
-* PHP-SDL
-* PHP-OpenGL
+* PHP 8.1
 * Composer
+* [PHP-SDL](https://github.com/Ponup/php-sdl)
+* [PHP-OpenGL](https://github.com/Ponup/php-opengl)
 
 Usage
 =====
 
 ```bash
-$ composer install
-$ php main.php
+composer install
+php main.php
 ```
 
 - Click to add cubes
